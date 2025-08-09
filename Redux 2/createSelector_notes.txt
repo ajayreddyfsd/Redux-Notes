@@ -1,0 +1,10 @@
+
+
+selector vs createSelector
+
+What is a selector?	A function to get a piece of Redux state
+Why use createSelector?	To avoid re-running calculations if nothing changed
+When to use it?	When you calculate/derive something (total, filter, etc.)
+How it works?	Input → Memoized Output
+
+also, to use createSelector, we need a simple base selector

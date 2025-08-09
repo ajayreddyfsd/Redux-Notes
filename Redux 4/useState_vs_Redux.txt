@@ -1,0 +1,53 @@
+When to Use useState vs Redux
+=============================
+
+🟢 useState (React Local State)
+-------------------------------
+✅ Use when:
+- You only need the state inside one component.
+- You are building simple UIs or feature-specific logic.
+- Example: form input values, modal open/close state, toggle buttons.
+
+📦 Example:
+```jsx
+import { useState } from 'react';
+
+function Counter() {
+  const [count, setCount] = useState(0);
+  return (
+    <div>
+      <button onClick={() => setCount(count - 1)}>-</button>
+      <span>{count}</span>
+      <button onClick={() => setCount(count + 1)}>+</button>
+    </div>
+  );
+}
+```
+
+🔴 Redux (Global State Management)
+----------------------------------
+✅ Use when:
+- Multiple components need access to the same state.
+- You want centralized control of state (like a "global database").
+- Your app has complex logic and many shared states.
+- You need tools like undo/redo, logging, debugging.
+
+📦 Example:
+- User Authentication (used across app)
+- Shopping Cart
+- Theme Toggler
+- Notifications
+
+🚨 Note:
+- Redux adds boilerplate and complexity—don’t use it unless needed.
+- For medium-sized apps, consider using React Context API + useReducer.
+
+🔁 Summary Table:
+-----------------
+| Situation                           | useState ✅ | Redux ✅ |
+|------------------------------------|-------------|----------|
+| Local state for a single component | ✅          | ❌       |
+| Shared state across many pages     | ❌          | ✅       |
+| Simple UI logic                    | ✅          | ❌       |
+| Complex app-wide state             | ❌          | ✅       |
+| Learning / fast prototyping        | ✅          | ❌       |

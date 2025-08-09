@@ -1,0 +1,10 @@
+we know we have folder in redix right like the cart, user and the categories.
+now, we just put a saga file in each of the folders.
+now in total we have 5 files each.
+the types, action-creator, the reducer and the selector and the new saga file
+
+
+so, all these saga files we combine in root-saga
+and then add this combines saga file as middleware in store.just
+
+
