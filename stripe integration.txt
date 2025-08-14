@@ -1,0 +1,136 @@
+Stripe Payment Integration in React with Netlify Functions
+A Step-by-Step Guide
+
+This document outlines how to integrate Stripe payments into a React application using Netlify Functions for serverless backend logic.
+
+
+
+
+
+1. Prerequisites
+A Stripe account (sign up here)
+
+A Netlify account (sign up here)
+
+A React project set up with:
+
+create-react-app or Vite
+
+Node.js (v16+)
+
+
+
+
+
+
+
+2. Setting Up Stripe
+A. Get Stripe API Keys
+Go to the Stripe Dashboard.
+
+Copy:
+
+Publishable Key (pk_test_...) → For frontend
+
+Secret Key (sk_test_...) → For backend (Netlify Function)
+
+
+
+
+
+
+
+B. Install Stripe Libraries
+bash
+npm install @stripe/stripe-js @stripe/react-stripe-js stripe
+
+
+
+
+
+
+3. Frontend Setup (React)
+A. Configure Stripe Provider
+Wrap your app with StripeProvider in App.jsx:
+
+
+
+
+
+
+
+B. Create a Payment Form
+Use Stripe’s CardElement in your payment form:
+
+
+
+
+
+4. Backend Setup (Netlify Functions)
+A. Create a Netlify Function
+In your project root, create:
+
+
+
+B. Configure netlify.toml
+toml
+[build]
+  command = "npm run build"
+  publish = "build"
+  functions = "netlify/functions"
+
+
+
+5. Environment Variables
+A. Local Development (/.env)
+env
+REACT_APP_STRIPE_PUBLIC_KEY=pk_test_your_key_here
+STRIPE_SECRET_KEY=sk_test_your_key_here
+(Add .env to .gitignore!)
+
+
+
+B. Netlify Deployment
+Go to Netlify Dashboard → Site Settings → Environment Variables.
+
+Add:
+
+text
+STRIPE_SECRET_KEY = sk_test_your_key_here
+REACT_APP_STRIPE_PUBLIC_KEY = pk_test_your_key_here
+
+
+
+
+6. Deploy to Netlify
+Connect your GitHub/GitLab repo to Netlify.
+
+Set build settings:
+
+Base directory: (Leave empty if package.json is in root)
+
+Build command: CI= npm run build
+
+Publish directory: build
+
+Deploy!
+
+
+
+
+7. Testing Payments
+Use Stripe test cards (e.g., 4242 4242 4242 4242).
+
+Check Netlify Functions logs for errors.
+
+Troubleshooting
+Issue	Solution
+404 on Netlify Function	Ensure netlify/functions exists and netlify.toml is configured.
+Stripe key errors	Verify environment variables in Netlify.
+CORS errors	Ensure frontend calls /.netlify/functions/....
+Final Notes
+✔ Never expose STRIPE_SECRET_KEY in client-side code.
+✔ Use Netlify Functions for secure backend logic.
+✔ Test payments in Stripe’s test mode before going live.
+
+Your Stripe integration is now complete! 🚀
